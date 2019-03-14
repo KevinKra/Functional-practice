@@ -64,6 +64,74 @@ the accumulator, if it does: ++ the key's value. if it doesnt: create a new
 key and assign it a value of 1;
 */
 
+//6 Grouping objects by property
+var people = [
+  { name: 'Alice', age: 21 },
+  { name: 'Max', age: 20 },
+  { name: 'Jane', age: 20 }
+];
+
+function sortBy(objectArray, property) {
+	return objectArray.reduce( (total, current) => {
+		let key = current[property];
+		if (!total[key]) {
+			total[key] = [];
+		}
+		total[key].push(current);
+		return total;
+	}, {})
+}
+
+sortBy(people, 'age');
+
+/*
+Annotation: We create a function to provide the parameter object and property,
+we can now pass in an object source and what property we want to project by.
+Now, we reduce the passed in object and create a key variable that is assigned 
+current element's property value. If our accumulator does not have the unique
+key, then it will create it and assign it to an empty array. Then we push the
+current element into the relevant accumulator array
+*/
+
+
+//7 Bond nested arrays of objects using spread operator (and initial value);
+var friends = [{
+  name: 'Anna',
+  books: ['Bible', 'Harry Potter'],
+  age: 21
+}, {
+  name: 'Bob',
+  books: ['War and peace', 'Romeo and Juliet'],
+  age: 26
+}, {
+  name: 'Alice',
+  books: ['The Lord of the Rings', 'The Shining'],
+  age: 18
+}];
+
+let compiled = friends.reduce( (accum, curr) => {
+	return [...accum, ...curr.books]
+}, [])
+
+compiled;
+
+/*
+Annotation: every element we iterate through, we grab the value of it's book
+array (the whole array), and then spread it into an array and return it.
+After the initial spread insertion, future book arrays will be concated
+to the spread accum array.
+
+// essentially: ['Bible', 'Harry Potter', + 'War and peace', 'Romeo and Juliet']
+*/
+
+
+
+
+
+
+
+
+
 
 
 
